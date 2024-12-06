@@ -28,14 +28,15 @@ jobs:
         working-directory: .
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: |
+          cd dist
+          zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: release.zip
-
+          path: ./dist/release.zip
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -58,4 +59,4 @@ jobs:
         with:
           app-name: "hello-world-app-to-delete"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5302AB0DED0C4A5B913D8CED27462CA1 }}
-          package: ./dist/hello-world-app
+          package: ./hello-world-app
