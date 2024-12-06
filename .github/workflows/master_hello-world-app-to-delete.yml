@@ -66,5 +66,5 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: "hello-world-app-to-delete"
-          slot-name: "Production"
-          package: .
+          publish-profile: $
+          package: ./dist/hello-world-app
